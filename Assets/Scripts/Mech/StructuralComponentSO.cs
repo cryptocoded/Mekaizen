@@ -48,4 +48,17 @@ public class StructuralComponentSO : MechComponentSO
         }
         return;
     }
+
+    public void RemoveEquipable(EquipComponentSO equip)
+    {
+        if(AllEquips.Contains(equip))
+        {
+            AllEquips.Remove(equip);
+            AvailableHardpoints += equip.RequiredHardpoints;
+        }
+        else
+        {
+            Debug.LogWarning($"RemoveEquipable failed: {equip} is not equipped.");
+        }
+    }
 }
