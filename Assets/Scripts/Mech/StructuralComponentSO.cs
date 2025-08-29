@@ -6,7 +6,7 @@ public class StructuralComponentSO : MechComponentSO
 {
     public int AvailableHardpoints
     {
-        get; private set;
+        get; set;
     }
 
     public List<EquipComponentSO> AllEquips;
