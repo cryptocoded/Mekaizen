@@ -13,7 +13,9 @@ public class MechComponentSO : ScriptableObject
     public SlotType Slot = SlotType.None;
 
     [Header("Mounting")]
-    public bool ProvidesHardpoint = false;
+    public HardpointsManager HardpointsManager;
+
+    public int RequiredHardpoints = 0;
 
     [Header("Visuals")]
     public Sprite Icon; // <— NEW: optional UI icon
@@ -25,6 +27,7 @@ public class MechComponentSO : ScriptableObject
 
     public bool HasTag(string tag) => Tags != null && Tags.Contains(tag);
     public bool IsStructural => Slot != SlotType.None;
+//this is really "attaches to a hardpoint," buuutttt
     public bool IsWeapon => Type == ComponentType.Weapon;
 }
 

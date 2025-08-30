@@ -10,36 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 052a709df53cf5f46989d26349de4aa2, type: 3}
-  m_Name: HeadBeginnersHelmSO
+  m_Name: BeamGun
   m_EditorClassIdentifier: 
-  DisplayName: Beginner's Helm
-  Type: 1
-  Slot: 6
+  DisplayName: BeamGun
+  Type: 0
+  Slot: 0
   HardpointsManager:
-    parentSlot: 6
+    parentSlot: 0
     mountedWeapons: []
-    TotalPoints: 5
-    currentPoints: 5
-  RequiredHardpoints: 0
+    TotalPoints: 0
+    currentPoints: 0
+  RequiredHardpoints: 1
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Tags:
-  - Beginner
-  - Beginner
+  - Weapon
+  - Ranged
   BaseStats:
-  - Type: 0
-    Value: 10
-  - Type: 1
-    Value: 9
-  - Type: 2
-    Value: 8
-  - Type: 3
-    Value: 7
   - Type: 4
-    Value: 6
-  - Type: 5
-    Value: 5
+    Value: 10
   - Type: 6
-    Value: 4
+    Value: 1
   - Type: 7
-    Value: 3
+    Value: 34
   Effects: []

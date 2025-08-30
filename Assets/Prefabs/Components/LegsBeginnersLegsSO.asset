@@ -15,7 +15,12 @@ MonoBehaviour:
   DisplayName: Beginner's Legs
   Type: 1
   Slot: 1
-  ProvidesHardpoint: 1
+  HardpointsManager:
+    parentSlot: 0
+    mountedWeapons: []
+    TotalPoints: 0
+    currentPoints: 0
+  RequiredHardpoints: 0
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Tags:
   - Beginner

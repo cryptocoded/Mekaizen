@@ -20,8 +20,8 @@ namespace Mechs
             };
 
         [Header("Per-Slot Hardpoints (auto-created if the installed structural provides one)")]
-        [SerializeField] private Dictionary<SlotType, Hardpoint> hardpoints =
-            new Dictionary<SlotType, Hardpoint>();
+        [SerializeField] private Dictionary<SlotType, HardpointsManager> hardpoints =
+            new Dictionary<SlotType, HardpointsManager>();
 
         [Header("Computed (read-only in inspector)")]
         [SerializeField] private StatSheet finalStats = new StatSheet();
@@ -57,10 +57,13 @@ namespace Mechs
             structural[s] = component;
 
             // Manage hardpoint for this slot
-            if (component.ProvidesHardpoint)
+            var numHardpoints = component.HardpointsManager.TotalPoints;
+            if (numHardpoints > 0)
             {
                 if (!hardpoints.ContainsKey(s))
-                    hardpoints[s] = new Hardpoint(s);
+                {
+                    hardpoints[s] = new HardpointsManager(s);
+                }
             }
             else
             {
@@ -103,11 +106,11 @@ namespace Mechs
             return ok;
         }
 
-        public void UnmountWeapon(SlotType slot)
+        public void UnmountWeapon(SlotType slot, MechComponentSO weapon)
         {
-            if (hardpoints.TryGetValue(slot, out var hp))
+            if (hardpoints.TryGetValue(slot, out var points))
             {
-                hp.Unmount();
+                points.Unmount(weapon);
                 RebuildAll();
             }
         }
@@ -122,8 +125,10 @@ namespace Mechs
             // Gather components: all installed structural + any mounted weapons
             IEnumerable<MechComponentSO> allComps = structural.Values.Where(c => c != null);
             var weaponComps = hardpoints.Values
-                                        .Select(hp => hp.MountedWeapon)
-                                        .Where(w => w != null);
+                                        .Select(hp => hp.MountedWeapons)
+                                        .Where(w => w != null)
+                                        .SelectMany(x => x)
+                                        .ToList();;
 
             allComps = allComps.Concat(weaponComps);
 
@@ -190,19 +195,19 @@ namespace Mechs
         public MechComponentSO GetStructural(SlotType slot) =>
             structural.TryGetValue(slot, out var c) ? c : null;
 
-        public Hardpoint GetHardpoint(SlotType slot) =>
+        public HardpointsManager GetHardpoint(SlotType slot) =>
             hardpoints.TryGetValue(slot, out var hp) ? hp : null;
 
         public IEnumerable<MechComponentSO> AllEquipped()
         {
             foreach (var s in structural.Values) if (s != null) yield return s;
-            foreach (var w in hardpoints.Values) if (w.MountedWeapon != null) yield return w.MountedWeapon;
+            //foreach (var w in hardpoints.Values) if (w.MountedWeapon != null) yield return w.MountedWeapon; - I don't think we care if all hardpoints are filled
         }
 
         public SlotType GetParentSlotOfWeapon(MechComponentSO weapon)
         {
             foreach (var kv in hardpoints)
-                if (kv.Value.MountedWeapon == weapon)
+                if (kv.Value.MountedWeapons.Contains(weapon))
                     return kv.Key;
             return SlotType.None;
         }

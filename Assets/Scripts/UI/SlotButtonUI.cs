@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +12,8 @@ namespace Mechs.UI
     {
         public SlotType Slot;
         public Button StructuralButton;
-        public Button WeaponButton; // small overlay button
+        public Button WeaponButton; // small overlay button - should probably be a prefab.
+        public List<Button> ActiveHardpointButtons;
         public Image StructuralIcon;
         public Image WeaponIcon;
         public TMP_Text StructuralLabel;
@@ -27,18 +32,31 @@ namespace Mechs.UI
         public void Refresh(Mechs.MechRuntime mech)
         {
             var structural = mech.GetStructural(Slot);
-            var hp = mech.GetHardpoint(Slot);
+            var hardpoints = structural != null ? structural.HardpointsManager : null;// mech.GetHardpoint(Slot);
             // Structural visuals
             if (StructuralLabel) StructuralLabel.text = structural ? structural.DisplayName : $"[{Slot}]";
             if (StructuralIcon)  StructuralIcon.sprite = structural ? structural.Icon : null;
             if (StructuralIcon)  StructuralIcon.enabled = structural && structural.Icon != null;
 
             // Weapon visuals / availability
-            bool hasHP = hp != null;
-            if (WeaponButton) WeaponButton.gameObject.SetActive(hasHP);
+            
+            bool hasHardpoint = hardpoints?.TotalPoints > 0;
+            
 
-            var weapon = hasHP ? hp.MountedWeapon : null;
-            if (WeaponLabel) WeaponLabel.text = weapon ? weapon.DisplayName : (hasHP ? "Weapon" : "");
+            if (WeaponButton) WeaponButton.gameObject.SetActive(hasHardpoint);
+            if (!hasHardpoint)
+                return;
+            for (int i = 0; i < hardpoints.TotalPoints; i++)
+            {
+                var newButton = Instantiate(WeaponButton);
+                newButton.transform.SetParent(WeaponButton.transform.parent);
+                newButton.transform.position = new Vector3(WeaponButton.transform.position.x - 30*i, WeaponButton.transform.position.y, WeaponButton.transform.position.z);
+                ActiveHardpointButtons.Add(newButton);
+            }
+
+            //This will only display icons for the first mounted weapon. Change this to support many.
+                var weapon = hasHardpoint ? hardpoints.MountedWeapons?.FirstOrDefault() : null;
+            if (WeaponLabel) WeaponLabel.text = weapon ? weapon.DisplayName : (hasHardpoint ? "Weapon" : "");
             if (WeaponIcon)
             {
                 WeaponIcon.sprite = weapon ? weapon.Icon : null;

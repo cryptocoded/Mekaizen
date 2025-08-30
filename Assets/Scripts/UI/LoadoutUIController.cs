@@ -47,7 +47,7 @@ namespace Mechs.UI
         private void OnEnable()
         {
             // Default to structural selection for Arms to get started
-            SelectStructural(SlotType.Arms);
+            SelectStructural(SlotType.Head);
             RefreshPaperDoll();
         }
 
