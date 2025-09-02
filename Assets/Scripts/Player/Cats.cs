@@ -12,7 +12,7 @@ public class Cats : MonoBehaviour
         int effectiveLevel = 0;
         foreach (var cat in CatList)
         {
-            effectiveLevel += cat.Level;
+            effectiveLevel += cat.GetEffectiveLevel();
             //TODO - apply ability bonuses
             //maybe make a cat function that gets the effective level given the type of upgrade.
         }
@@ -24,7 +24,7 @@ public class Cats : MonoBehaviour
         float critChance = 0;
         foreach (var cat in CatList)
         {
-            critChance += cat.critChance;
+            critChance += cat.GetCritChance();
             //TODO - same as above
         }
         return critChance;

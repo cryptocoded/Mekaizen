@@ -5,30 +5,45 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
-    public int Level;
-    public int ExpToNextLevelAbs;
-    public int CurrentExp; //each level is 10x Level exp.
-    public CatAbilities Abilities; //1 ability per 10 levels scaling infinitely.
-    public float critChance;
+    [SerializeField]
+    private int Level;
+    private int CurrentExp; //each level is 10x Level exp.
+    private CatAbilities Abilities; //1 ability per 10 levels scaling infinitely.
+    private float Morale;
     // Start is called before the first frame update
     public void GainExp(int exp)
     {
         CurrentExp += exp;
-        if (CurrentExp >= ExpToNextLevelAbs)
+        if (CurrentExp >= TotalExpToNextLevel())
         {
-            int newExp = CurrentExp - ExpToNextLevelAbs;
+            int newExp = CurrentExp - TotalExpToNextLevel();
             CurrentExp = 0;
             LevelUp();
             GainExp(newExp);
         }
     }
 
-    public void LevelUp()
+    public int TotalExpToNextLevel()
+    {
+        return Level * 10;
+    }
+
+    private void LevelUp()
     {
         Level += 1;
         if (Level % 10 == 0)
         {
             Abilities.AddAbility();
         }
+    }
+
+    public float GetCritChance()
+    {
+        return 0;
+    }
+
+    public int GetEffectiveLevel(/*type of upgrade*/)
+    {
+        return Level;
     }
 }

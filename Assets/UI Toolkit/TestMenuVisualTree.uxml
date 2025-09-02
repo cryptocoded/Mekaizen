@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/TestMenuStyle.uss?fileID=7433441132597879392&amp;guid=4a03b731e3fcc034b9988fe5800324dc&amp;type=3#TestMenuStyle" />
+    <ui:VisualElement style="flex-grow: 1; width: 1919px; align-self: auto; justify-content: flex-end; align-items: auto; bottom: auto; top: auto;">
+        <ui:Button text="Damage" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DamageBtn" class="button" style="left: 40px;" />
+        <ui:Button text="Power Generation" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PowerGenBtn" class="button" style="-unity-text-align: middle-center; left: 399px;" />
+        <ui:Button text="Speed" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpeedBtn" class="button" style="left: 759px;" />
+        <ui:Button text="Armor" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ArmorBtn" class="button" style="left: 1118px;" />
+        <ui:Button text="Computation" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ComputationBtn" class="button" style="left: 1478px;" />
+    </ui:VisualElement>
+</ui:UXML>

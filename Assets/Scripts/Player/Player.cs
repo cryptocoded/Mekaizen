@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int yarn;
-    public int morale;
     public int prestige;
     public Cats CatEngineers;
     // Start is called before the first frame update
