@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052a709df53cf5f46989d26349de4aa2, type: 3}
+  m_Name: CoreBeginnersCoreSO
+  m_EditorClassIdentifier: 
+  DisplayName: Beginner's Core
+  Type: 1
+  Slot: 3
+  HardpointsManager:
+    _capacity: 0
+    _occ: []
+  HardpointCount: 0
+  HardpointsRequired: 0
+  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Tags:
+  - Beginner
+  - Beginner
+  BaseStats:
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  Effects: []

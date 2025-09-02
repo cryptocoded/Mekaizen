@@ -30,8 +30,10 @@ namespace Mechs.UI
 
         private readonly List<ComponentItemUI> _spawned = new();
 
-        private enum SelectMode { None, Structural, WeaponForSlot }
+        private enum SelectMode { None, Structural, WeaponForHardpoint }
         private SelectMode mode = SelectMode.None;
+
+        private int selectedHardpointIndex = 0;
         private SlotType selectedSlot = SlotType.None;
 
         private void Awake()
@@ -47,7 +49,7 @@ namespace Mechs.UI
         private void OnEnable()
         {
             // Default to structural selection for Arms to get started
-            SelectStructural(SlotType.Arms);
+            SelectStructural(SlotType.Head);
             RefreshPaperDoll();
         }
 
@@ -66,20 +68,25 @@ namespace Mechs.UI
             HighlightSelectedSlot(slot);
         }
 
-        public void SelectWeaponForSlot(SlotType slot)
+        public void SelectWeaponForSlot(SlotType slot, int hardpointIndex)
         {
-            // Only valid if slot has a hardpoint
-            if (mech.GetHardpoint(slot) == null)
+            // Guard: ensure the slot actually has that hardpoint
+            int count = mech.GetHardpointCount(slot);
+            if (hardpointIndex < 0 || hardpointIndex >= count)
             {
-                Debug.LogWarning($"{slot} has no hardpoint.");
+                Debug.LogWarning($"{slot} hardpoint {hardpointIndex} is out of range (0..{count-1}).");
                 return;
             }
-            mode = SelectMode.WeaponForSlot;
+
+            mode = SelectMode.WeaponForHardpoint;
             selectedSlot = slot;
-            if (headerText) headerText.text = $"Select Weapon for {slot} Hardpoint";
-            PopulateInventory();
+            selectedHardpointIndex = hardpointIndex;
+
+            if (headerText) headerText.text = $"Select Weapon for {slot} HP {hardpointIndex+1}";
+            PopulateInventory();     // filter to weapons as you already do
             HighlightSelectedSlot(slot);
         }
+
 
         private void HighlightSelectedSlot(SlotType slot)
         {
@@ -105,7 +112,7 @@ namespace Mechs.UI
             {
                 items = database.GetStructuralForSlot(selectedSlot);
             }
-            else if (mode == SelectMode.WeaponForSlot)
+            else if (mode == SelectMode.WeaponForHardpoint)
             {
                 items = database.GetWeapons();
             }
@@ -126,40 +133,35 @@ namespace Mechs.UI
         }
 
         public void OnInventoryItemClicked(MechComponentSO comp)
+{
+    if (comp == null) return;
+
+    if (mode == SelectMode.Structural)
+    {
+        if (!comp.IsStructural || comp.Slot != selectedSlot)
         {
-            if (comp == null) return;
-
-            if (mode == SelectMode.Structural)
-            {
-                // Must be structural and Slot must match selection
-                if (!comp.IsStructural || comp.Slot != selectedSlot)
-                {
-                    Debug.LogWarning($"Cannot equip {comp.DisplayName} into {selectedSlot}.");
-                    return;
-                }
-                mech.EquipStructural(comp);
-
-                // After equipping, keep selection on same slot for easy swapping
-                SelectStructural(selectedSlot);
-            }
-            else if (mode == SelectMode.WeaponForSlot)
-            {
-                if (!comp.IsWeapon)
-                {
-                    Debug.LogWarning($"Cannot mount non-weapon {comp.DisplayName} to {selectedSlot} hardpoint.");
-                    return;
-                }
-                bool ok = mech.MountWeapon(selectedSlot, comp);
-                if (!ok)
-                {
-                    Debug.LogWarning($"Failed to mount {comp.DisplayName} to {selectedSlot}");
-                }
-                // Stay in weapon mode for rapid testing
-                SelectWeaponForSlot(selectedSlot);
-            }
-
-            RefreshPaperDoll();
+            Debug.LogWarning($"Cannot equip {comp.DisplayName} into {selectedSlot}.");
+            return;
         }
+        mech.EquipStructural(comp);
+        SelectStructural(selectedSlot); // stay focused
+    }
+    else if (mode == SelectMode.WeaponForHardpoint)
+    {
+        if (!comp.IsWeapon)
+        {
+            Debug.LogWarning($"Cannot mount non-weapon {comp.DisplayName} to {selectedSlot}.");
+            return;
+        }
+        bool ok = mech.MountWeapon(selectedSlot, selectedHardpointIndex, comp);
+        if (!ok) Debug.LogWarning($"Failed to mount {comp.DisplayName} to {selectedSlot} HP {selectedHardpointIndex+1}");
+        // stay in weapon mode for rapid testing
+        SelectWeaponForSlot(selectedSlot, selectedHardpointIndex);
+    }
+
+    RefreshPaperDoll();
+}
+
 
         private void RefreshPaperDoll()
         {
