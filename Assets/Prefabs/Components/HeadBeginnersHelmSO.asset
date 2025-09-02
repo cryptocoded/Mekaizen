@@ -16,30 +16,77 @@ MonoBehaviour:
   Type: 1
   Slot: 6
   HardpointsManager:
-    parentSlot: 6
-    mountedWeapons: []
-    TotalPoints: 5
-    currentPoints: 5
-  RequiredHardpoints: 0
+    _capacity: 5
+    _occ: []
+  HardpointCount: 4
+  HardpointsRequired: 0
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Tags:
   - Beginner
   - Beginner
   BaseStats:
-  - Type: 0
-    Value: 10
-  - Type: 1
-    Value: 9
-  - Type: 2
-    Value: 8
-  - Type: 3
-    Value: 7
-  - Type: 4
-    Value: 6
-  - Type: 5
-    Value: 5
-  - Type: 6
-    Value: 4
-  - Type: 7
-    Value: 3
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
+  - Armor: 0
+    PowerGeneration: 0
+    PowerConsumption: 0
+    Speed: 0
+    Damage: 0
+    Range: 0
+    Accuracy: 0
+    Weight: 0
   Effects: []

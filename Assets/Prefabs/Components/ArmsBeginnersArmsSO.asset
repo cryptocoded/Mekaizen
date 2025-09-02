@@ -15,27 +15,22 @@ MonoBehaviour:
   DisplayName: Beginner's Arms
   Type: 1
   Slot: 5
-  NumHardpoints: 1
-  RequiredHardpoints: 0
+  HardpointsManager:
+    _capacity: 5
+    _occ: []
+  HardpointCount: 2
+  HardpointsRequired: 0
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Tags:
-  - Beginner
-  - Beginner
+  - Armor
+  - Arms
   BaseStats:
-  - Type: 0
-    Value: 10
-  - Type: 1
-    Value: 9
-  - Type: 2
-    Value: 8
-  - Type: 3
-    Value: 7
-  - Type: 4
-    Value: 6
-  - Type: 5
-    Value: 5
-  - Type: 6
-    Value: 4
-  - Type: 7
-    Value: 3
+  - Armor: 2
+    PowerGeneration: 3
+    PowerConsumption: 4
+    Speed: 5
+    Damage: 6
+    Range: 7
+    Accuracy: 8
+    Weight: 9
   Effects: []

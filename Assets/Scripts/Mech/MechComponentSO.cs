@@ -15,14 +15,19 @@ public class MechComponentSO : ScriptableObject
     [Header("Mounting")]
     public HardpointsManager HardpointsManager;
 
-    public int RequiredHardpoints = 0;
+    [Header("Hardpoints")]
+    [Tooltip("Structural parts only: how many weapon mounts this part exposes.")]
+    [Min(0)] public int HardpointCount = 0;
+
+    [Tooltip("Weapon parts only: how many hardpoints this weapon needs, from a single structural slot.")]
+    [Min(0)] public int HardpointsRequired = 0;
 
     [Header("Visuals")]
     public Sprite Icon; // <— NEW: optional UI icon
 
     [Header("Tags & Stats")]
     public List<string> Tags = new List<string>();
-    public List<StatEntry> BaseStats = new List<StatEntry>();
+    public List<StatBlock> BaseStats;
     public List<SpecialEffectSO> Effects = new List<SpecialEffectSO>();
 
     public bool HasTag(string tag) => Tags != null && Tags.Contains(tag);
