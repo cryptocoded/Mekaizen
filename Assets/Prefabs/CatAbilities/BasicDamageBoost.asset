@@ -15,12 +15,18 @@ MonoBehaviour:
   DisplayName: Basic Damage Boost
   Description: A basic ability that provides a small boost when working on researching
     damage.
+  isPercentBoost: 0
   DamageBoost: 5
   PowerGenBoost: 0
   SpeedBoost: 0
   ArmorBoost: 0
   ComputationBoost: 0
-  ExternalDescription: 
-  GlobalDescription: 
+  CatChance: 0
+  Level: 0
+  NumOtherCats: 0
+  NumCatsComparisonOperator: 0
+  TotalEffectiveLevel: 0
+  TotalEffectiveLevelComparisonOperator: 0
+  AbilityKind: 0
   Chances: []
   Abilities: []
