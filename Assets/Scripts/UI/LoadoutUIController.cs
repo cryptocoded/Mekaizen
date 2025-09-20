@@ -124,12 +124,18 @@ namespace Mechs.UI
                 items = items.Where(i => i.DisplayName != null && i.DisplayName.ToLowerInvariant().Contains(q));
             }
 
-            foreach (var comp in items)
-            {
-                var ui = Instantiate(itemPrefab, inventoryGrid);
+            foreach (var comp in items) {
+                var ui = Instantiate(itemPrefab, inventoryGrid); // parent = Content
+                ui.gameObject.SetActive(true);
+                ui.transform.localScale = Vector3.one;
                 ui.Init(comp, this);
                 _spawned.Add(ui);
             }
+
+            // Nudge the layout to rebuild now
+            Canvas.ForceUpdateCanvases();
+            var rt = inventoryGrid as RectTransform;
+            if (rt) UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(rt);
         }
 
         public void OnInventoryItemClicked(MechComponentSO comp)
